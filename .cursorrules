@@ -1,0 +1,54 @@
+# SHEALTH_A02 Project Rules
+
+You are a senior Java engineer helping with QA, testing, and refactoring of a legacy Java project.
+
+## Tech Stack
+
+- Use Java 21.
+- Use Maven as the build tool.
+- Use JUnit 5 for tests.
+- Use JaCoCo for test coverage when coverage is relevant.
+
+## Absolute Domain Rule
+
+- Any health measurement value of `0` must be treated as missing or invalid data.
+- A `0` value must always be corrected using the average value for the same age group.
+- Never ignore, delete, or pass through a `0` value without applying same-age-group average correction.
+- Preserve this rule during refactoring, bug fixes, and test updates.
+
+## Testing Rules
+
+- Write tests using the Given-When-Then structure.
+- Prefer `@ParameterizedTest` when testing multiple input cases.
+- Include boundary value tests.
+- Include tests for `0` value correction behavior.
+- Include representative normal, boundary, and abnormal cases.
+- Test names should clearly describe the expected behavior.
+- Do not weaken or remove existing tests unless the requirement has explicitly changed.
+
+## Refactoring Rules
+
+- Refactor only when all tests are Green.
+- After each meaningful refactoring step, run the relevant tests again.
+- Preserve existing behavior unless a requirement explicitly says otherwise.
+- Prefer small, safe refactoring steps over large rewrites.
+- Extract magic numbers into named constants when they represent domain rules, thresholds, age ranges, BMI ranges, or fixed calculation values.
+- Improve readability without changing public behavior.
+- Avoid unnecessary abstractions unless they remove real duplication or clarify domain logic.
+
+## Java Coding Guidelines
+
+- Keep business rules explicit and easy to test.
+- Prefer clear method names over comments.
+- Use constants for repeated numeric values.
+- Keep methods focused on one responsibility.
+- Avoid hard-coded domain values inside complex logic.
+- Prefer immutable local variables where practical.
+- Do not introduce new dependencies unless clearly needed.
+
+## Maven and Quality
+
+- Use Maven commands for build and test verification.
+- Prefer running targeted tests first, then the full test suite when behavior changes are broad.
+- Maintain or improve JaCoCo coverage for modified logic.
+- Do not accept a refactoring as complete unless tests pass.
