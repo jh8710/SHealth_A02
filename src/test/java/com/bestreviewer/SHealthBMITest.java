@@ -70,4 +70,59 @@ public class SHealthBMITest {
                 () -> assertEquals(50.0, thirties.getObesityRatio(), DELTA)
         );
     }
+
+    @Test
+    void should_calculate_specific_age_group_bmi_distribution() {
+        BMICalculator calculator = new BMICalculator();
+        List<BmiRecord> records = Arrays.asList(
+                new BmiRecord(24, 50.0, 170.0),
+                new BmiRecord(26, 65.0, 170.0),
+                new BmiRecord(34, 80.0, 170.0)
+        );
+
+        BmiStatistics statistics = calculator.calculateAgeGroupDistribution(records, 20);
+
+        assertAll(
+                () -> assertEquals(50.0, statistics.getUnderweightRatio(), DELTA),
+                () -> assertEquals(50.0, statistics.getNormalRatio(), DELTA),
+                () -> assertEquals(0.0, statistics.getObesityRatio(), DELTA)
+        );
+    }
+
+    @Test
+    void should_find_users_in_normal_bmi_range() {
+        BMICalculator calculator = new BMICalculator();
+        List<BmiRecord> records = Arrays.asList(
+                new BmiRecord("user1", 24, 50.0, 170.0),
+                new BmiRecord("user2", 26, 65.0, 170.0),
+                new BmiRecord("user3", 34, 80.0, 170.0)
+        );
+
+        List<BmiRecord> normalUsers = calculator.findNormalRangeUsers(records);
+
+        assertAll(
+                () -> assertEquals(1, normalUsers.size()),
+                () -> assertEquals("user2", normalUsers.get(0).getId())
+        );
+    }
+
+    @Test
+    void should_calculate_overall_category_ratio() {
+        BMICalculator calculator = new BMICalculator();
+        List<BmiRecord> records = Arrays.asList(
+                new BmiRecord(24, 50.0, 170.0),
+                new BmiRecord(26, 65.0, 170.0),
+                new BmiRecord(34, 70.0, 170.0),
+                new BmiRecord(38, 80.0, 170.0)
+        );
+
+        BmiStatistics statistics = calculator.calculateOverallCategoryRatio(records);
+
+        assertAll(
+                () -> assertEquals(25.0, statistics.getUnderweightRatio(), DELTA),
+                () -> assertEquals(25.0, statistics.getNormalRatio(), DELTA),
+                () -> assertEquals(25.0, statistics.getOverweightRatio(), DELTA),
+                () -> assertEquals(25.0, statistics.getObesityRatio(), DELTA)
+        );
+    }
 }
