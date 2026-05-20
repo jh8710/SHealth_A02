@@ -52,3 +52,10 @@ id,age,weight,height
 # 주의 사항
 - 코드 품질을 높이기 위해 C++의 경우 STL, Java/python의 경우 외부 모듈을 필요한 경우 사용하셔도 됩니다.
 
+## Golden Master 회귀 테스트
+- `TexttestFixture.run(...)` 출력은 `src/test/resources/golden-master/golden_master_expected.txt`에 기준 출력으로 보관합니다.
+- 기준 입력 CSV는 `src/test/resources/golden-master/shealth_golden_master_input.csv`입니다.
+- 일반 검증은 `mvn test`로 실행하며, JUnit 5/Surefire 설정에 따라 CI에서도 자동 실행됩니다.
+- 의도적으로 출력이 변경된 경우에만 `mvn test -DupdateGoldenMaster=true`로 기준 출력을 갱신한 뒤 변경 내용을 리뷰합니다.
+- ApprovalTests는 동일한 출력 문자열을 approved/received 파일로 비교하는 방식으로 확장할 수 있습니다. 현재 구성은 외부 diff 도구 없이 CI에서 안정적으로 동작하도록 파일 기반 비교를 기본으로 사용합니다.
+

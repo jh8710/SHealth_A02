@@ -1,0 +1,190 @@
+# 07 테스트 실행 결함 분석 보고서 Prompting
+
+## 1. 사용한 프롬프트들
+
+### 1.1 테스트 실행 결함 분석 프롬프트
+
+```text
+@SHealthBMITest.java @SHealth.java
+
+[P] 디버깅과 결함 분석에 능한 Java QA 엔지니어입니다.
+[T] (여기에 mvn test 실패 로그를 붙여넣을 것)
+    1) 실패 원인 (기대/실제 값 차이) 요약
+    2) SHealth.java 내 메서드들에서 버그 위치 특정 (파일명:줄번호)
+    3) 결함 심각도 (Critical/Major/Minor/Info) 분류 및 근거
+    4) 최소 코드 변경으로 수정 방안 제안
+       - 단, Item 클래스는 수정 금지
+[F] 수정 diff 제안 + 수정 후 mvn test Green 확인 절차
+```
+
+### 1.2 보고서 및 프롬프트 갱신 요청
+
+```text
+이번에 한 내용을 report 폴더에 07_테스트_실행_결함_분석_보고서.md 파일로 내보내주고,
+프롬프트를 포함해서 Prompting 폴더에 07_테스트_실행_결함_분석_보고서-Prompting.md 파일로 내보내줘. 이미 작성되어있지만 새로운 내용이 추가되어서 갱신이야
+```
+
+## 2. 프롬프트 의도
+
+이 프롬프트는 `mvn test` 실패 로그를 기반으로 Java QA 엔지니어 관점의 결함 분석 보고서를 생성하도록 요청한다.
+
+핵심 의도는 다음과 같다.
+
+- 실패한 테스트의 기대값과 실제값 차이를 요약한다.
+- 결함이 발생한 위치를 `SHealth.java`의 파일명과 줄번호 기준으로 특정한다.
+- 결함의 심각도를 Critical, Major, Minor, Info 중 하나로 분류한다.
+- `Item` 클래스는 수정하지 않는 제약 안에서 최소 코드 변경안을 제안한다.
+- 수정 diff와 테스트 Green 확인 절차를 함께 제공한다.
+- 기존 보고서와 프롬프트 문서를 최신 테스트 실행 결과로 갱신한다.
+
+## 3. 수행 내용
+
+분석 대상 파일인 `SHealthBMITest.java`와 `SHealth.java`를 확인한 뒤, 실제로 `mvn test`를 실행해 실패 로그가 재현되는지 확인했다.
+
+실행 결과는 다음과 같이 전체 Green 상태였다.
+
+```text
+Running com.bestreviewer.SHealthBMITest
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+
+Running com.bestreviewer.TexttestFixtureGoldenMasterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+Results:
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+## 4. 생성 보고서
+
+# 07 테스트 실행 결함 분석 보고서
+
+## 1. 작업 개요
+
+이번 작업에서는 `SHealthBMITest.java`와 `SHealth.java`를 기준으로 BMI 테스트를 실행하고, 실패 로그가 재현되는지 확인했다.
+
+요청된 분석 항목은 다음과 같다.
+
+- `mvn test` 실패 원인 및 기대값/실제값 차이 요약
+- `SHealth.java` 내 버그 위치 특정
+- 결함 심각도 분류 및 근거 정리
+- `Item` 클래스 수정 없이 최소 코드 변경 방안 제안
+- 수정 diff 제안과 수정 후 `mvn test` Green 확인 절차 정리
+
+## 2. 분석 대상 파일
+
+- `src/test/java/com/bestreviewer/SHealthBMITest.java`
+- `src/main/java/com/bestreviewer/SHealth.java`
+- `src/main/java/com/bestreviewer/BMICalculator.java`
+- `src/main/java/com/bestreviewer/BmiRecord.java`
+- `src/main/java/com/bestreviewer/BmiCategory.java`
+- `src/main/java/com/bestreviewer/BmiStatistics.java`
+
+## 3. 테스트 실행 결과
+
+다음 명령으로 테스트를 실행했다.
+
+```bash
+mvn test
+```
+
+실행 결과는 다음과 같다.
+
+```text
+Running com.bestreviewer.SHealthBMITest
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+
+Running com.bestreviewer.TexttestFixtureGoldenMasterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+Results:
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+현재 작업본에서는 `SHealthBMITest` 40건과 Golden Master 테스트 1건이 모두 통과했다. 따라서 요청 프롬프트의 전제였던 `mvn test` 실패 로그는 현재 상태에서 재현되지 않았다.
+
+## 4. 실패 원인 분석
+
+현재 테스트 실행 결과가 Green 상태이므로 기대값과 실제값의 차이는 발생하지 않았다.
+
+| 항목 | 결과 |
+|---|---|
+| 기대값 | 테스트별 기대 BMI 계산값, 누락값 보정값, 카테고리 비율 |
+| 실제값 | 기대값과 일치 |
+| 실패 수 | 0 |
+| 에러 수 | 0 |
+| 결론 | 실패 원인 없음 |
+
+특히 `SHealth.calculateBmi()`를 통한 통합 테스트는 임시 CSV 파일을 생성한 뒤 `calculateBmi()`와 `getBmiRatio()` 흐름을 검증한다. 현재 구현에서는 CSV 데이터 15건을 정상 로딩하고, 20대/30대/40대별 BMI 카테고리 비율을 기대값대로 반환한다.
+
+## 5. `SHealth.java` 결함 위치 점검
+
+`SHealth.java`의 핵심 흐름은 다음과 같다.
+
+- `calculateBmi(String filename)`: CSV 파일을 읽고 통계를 계산한다.
+- `getBmiRatio(int ageClass, int type)`: 계산된 통계에서 연령대와 BMI 카테고리 코드에 해당하는 비율을 반환한다.
+- `loadRecords(String filename)`: CSV 헤더를 제외하고 각 행을 `BmiRecord`로 변환한다.
+- `createRecord(List<String> tokens)`: CSV 토큰을 도메인 객체로 변환한다.
+
+현재 기준으로 테스트 실패를 유발하는 버그 위치는 특정되지 않았다.
+
+다만 동일 계열의 실패가 발생한다면 우선 확인할 후보 위치는 다음과 같다.
+
+| 후보 위치 | 점검 이유 |
+|---|---|
+| `SHealth.java:30-33` | CSV 로딩 후 통계 계산 결과를 저장하는 진입점 |
+| `SHealth.java:36-44` | 연령대와 카테고리 코드에 따른 비율 반환 로직 |
+| `SHealth.java:59-74` | CSV 헤더 제외, 행 로딩, 파일 처리 로직 |
+| `SHealth.java:77-83` | CSV 토큰을 `BmiRecord`로 변환하는 로직 |
+
+현재 구현에서는 `BMICalculator.calculateStatistics()` 내부에서 누락 체중과 키 보정이 수행되므로, `SHealth.java`에 별도 보정 로직이 없어도 테스트가 통과한다.
+
+## 6. 결함 심각도 분류
+
+현재 확인된 결함은 없다.
+
+| 분류 | 판단 |
+|---|---|
+| 심각도 | Info |
+| 근거 | `mvn test` 결과 전체 41개 테스트가 통과했으며 실패, 에러, 스킵이 없다. |
+| 사용자 영향 | 현재 테스트 기준 기능 영향 없음 |
+| 수정 필요성 | 없음 |
+
+## 7. 최소 코드 변경 방안
+
+현재 테스트가 Green 상태이므로 코드 수정은 필요하지 않다.
+
+`Item` 클래스 수정 금지 조건과 관련해서도, 이번 BMI 테스트 흐름에서는 `Item` 클래스 수정이 필요하지 않다.
+
+수정 diff 제안은 다음과 같다.
+
+```diff
+# no changes required
+```
+
+## 8. Green 확인 절차
+
+수정 여부와 관계없이 다음 절차로 회귀 테스트를 확인한다.
+
+```bash
+mvn test
+```
+
+기대 결과:
+
+```text
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+## 9. 결론
+
+이번 테스트 실행에서는 실패가 재현되지 않았고, `SHealth.java` 내에서 즉시 수정해야 할 결함도 발견되지 않았다.
+
+현재 BMI 계산, 누락값 보정, 카테고리 분류, 연령대별 통계, `SHealth` CSV API 통합 흐름은 모두 테스트 Green 상태로 확인되었다.
+
+## 5. 이번 세션 산출물
+
+- `report/07_테스트_실행_결함_분석_보고서.md`
+- `Prompting/07_테스트_실행_결함_분석_보고서-Prompting.md`
