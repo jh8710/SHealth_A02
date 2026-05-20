@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.bestreviewer.SHealthBMITest" time="0.164" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.bestreviewer.SHealthBMITest" time="0.743" tests="37" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="KR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-25.0.3.9-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\정환\AppData\Local\Temp\surefire9235773503603777157\surefirebooter-20260520000500859_3.jar C:\Users\정환\AppData\Local\Temp\surefire9235773503603777157 2026-05-20T00-05-00_337-jvmRun1 surefire-20260520000500859_1tmp surefire_0-20260520000500859_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\정환\AppData\Local\Temp\surefire10480695720569939133\surefirebooter-20260520090554609_3.jar C:\Users\정환\AppData\Local\Temp\surefire10480695720569939133 2026-05-20T09-05-54_050-jvmRun1 surefire-20260520090554609_1tmp surefire_0-20260520090554609_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\dev\shealth_bmi_A02_java\SHealth_A02\target\test-classes;C:\dev\shealth_bmi_A02_java\SHealth_A02\target\classes;C:\Users\정환\.m2\repository\org\junit\jupiter\junit-jupiter\5.5.2\junit-jupiter-5.5.2.jar;C:\Users\정환\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\정환\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\정환\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\정환\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.5.2\junit-jupiter-params-5.5.2.jar;C:\Users\정환\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.5.2\junit-jupiter-engine-5.5.2.jar;C:\Users\정환\.m2\repository\org\junit\platform\junit-platform-launcher\1.5.2\junit-platform-launcher-1.5.2.jar;C:\Users\정환\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\정환\.m2\repository\org\junit\platform\junit-platform-engine\1.5.2\junit-platform-engine-1.5.2.jar;C:\Users\정환\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\정환\.m2\repository\org\mockito\mockito-core\3.4.0\mockito-core-3.4.0.jar;C:\Users\정환\.m2\repository\net\bytebuddy\byte-buddy\1.10.10\byte-buddy-1.10.10.jar;C:\Users\정환\.m2\repository\net\bytebuddy\byte-buddy-agent\1.10.10\byte-buddy-agent-1.10.10.jar;C:\Users\정환\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\정환\.m2\repository\com\approvaltests\approvaltests\4.0.2\approvaltests-4.0.2.jar;C:\Users\정환\.m2\repository\com\approvaltests\approvaltests-util\4.0.2\approvaltests-util-4.0.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\정환\AppData\Local\Temp\surefire9235773503603777157\surefirebooter-20260520000500859_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\정환\AppData\Local\Temp\surefire10480695720569939133\surefirebooter-20260520090554609_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.3+9-LTS"/>
@@ -60,11 +60,41 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="should_calculate_overall_category_ratio" classname="should_calculate_overall_category_ratio()" time="0.077"/>
-  <testcase name="should_calculate_specific_age_group_bmi_distribution" classname="should_calculate_specific_age_group_bmi_distribution()" time="0.006"/>
-  <testcase name="should_classify_bmi_category_when_bmi_boundary_values_are_given" classname="should_classify_bmi_category_when_bmi_boundary_values_are_given()" time="0.005"/>
-  <testcase name="should_apply_average_correction_when_weight_and_height_are_zero" classname="should_apply_average_correction_when_weight_and_height_are_zero()" time="0.004"/>
+  <testcase name="should_calculate_overall_category_ratio" classname="should_calculate_overall_category_ratio()" time="0.081"/>
+  <testcase name="should_correct_missing_weight_by_same_age_group_average(int, double)[1]" classname="should_correct_missing_weight_by_same_age_group_average(int, double)[1]" time="0.07"/>
+  <testcase name="should_correct_missing_weight_by_same_age_group_average(int, double)[2]" classname="should_correct_missing_weight_by_same_age_group_average(int, double)[2]" time="0.003"/>
+  <testcase name="should_correct_missing_weight_by_same_age_group_average(int, double)[3]" classname="should_correct_missing_weight_by_same_age_group_average(int, double)[3]" time="0.005"/>
+  <testcase name="should_calculate_specific_age_group_bmi_distribution" classname="should_calculate_specific_age_group_bmi_distribution()" time="0.004"/>
+  <testcase name="should_classify_bmi_category_when_bmi_boundary_values_are_given" classname="should_classify_bmi_category_when_bmi_boundary_values_are_given()" time="0.006"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[1]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[1]" time="0.118"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[2]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[2]" time="0.009"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[3]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[3]" time="0.009"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[4]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[4]" time="0.01"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[5]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[5]" time="0.011"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[6]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[6]" time="0.01"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[7]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[7]" time="0.009"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[8]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[8]" time="0.008"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[9]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[9]" time="0.008"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[10]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[10]" time="0.009"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[11]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[11]" time="0.01"/>
+  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[12]" classname="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[12]" time="0.01"/>
+  <testcase name="should_apply_average_correction_when_weight_and_height_are_zero" classname="should_apply_average_correction_when_weight_and_height_are_zero()" time="0.003"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[1]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[1]" time="0.007"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[2]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[2]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[3]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[3]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[4]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[4]" time="0.003"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[5]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[5]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[6]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[6]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[7]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[7]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[8]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[8]" time="0.003"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[9]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[9]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[10]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[10]" time="0.001"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[11]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[11]" time="0.001"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[12]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[12]" time="0.001"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[13]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[13]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[14]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[14]" time="0.002"/>
+  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[15]" classname="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[15]" time="0.001"/>
   <testcase name="should_calculate_bmi_when_weight_and_height_are_valid" classname="should_calculate_bmi_when_weight_and_height_are_valid()" time="0.002"/>
   <testcase name="should_calculate_age_group_statistics_when_records_have_different_age_groups" classname="should_calculate_age_group_statistics_when_records_have_different_age_groups()" time="0.003"/>
-  <testcase name="should_find_users_in_normal_bmi_range" classname="should_find_users_in_normal_bmi_range()" time="0.002"/>
+  <testcase name="should_find_users_in_normal_bmi_range" classname="should_find_users_in_normal_bmi_range()" time="0.005"/>
 </testsuite>

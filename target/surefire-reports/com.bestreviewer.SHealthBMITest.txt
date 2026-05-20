@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.bestreviewer.SHealthBMITest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.164 s -- in com.bestreviewer.SHealthBMITest
+Tests run: 37, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.743 s -- in com.bestreviewer.SHealthBMITest
