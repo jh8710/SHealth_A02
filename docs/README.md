@@ -8,6 +8,14 @@
 ![BMI](./bmi.png)
 - 제공된 코드에는 다양한 코드 품질 문제가 있습니다. 
 
+## 구현 기능
+- `SHealth`는 외부 호출을 받는 파사드 역할만 담당하고, CSV 로딩, 누락값 보정, BMI 계산, 통계 계산은 책임별 클래스로 분리했습니다.
+- 체중 또는 키가 `0`인 경우 같은 나이대(20대, 30대 등)의 `0`이 아닌 값 평균으로 보정한 뒤 BMI를 계산합니다.
+- `getBmiDistributionRatio(ageClass)`로 특정 연령대의 BMI 범주별 비율을 조회할 수 있습니다.
+- `getNormalBmiUserIds()`로 BMI 정상 범위 사용자 ID 목록을 조회할 수 있습니다.
+- `getOverallBmiCategoryRatios()`로 전체 사용자 대비 각 BMI 범주 비율을 조회할 수 있습니다.
+- 기존 호환 API인 `getBmiRatio(ageClass, type)`도 유지합니다. `type`은 `100=저체중`, `200=정상`, `300=과체중`, `400=비만`입니다.
+
 
 ## data sample
 - 입력 데이터 (shealth.dat)
@@ -51,4 +59,11 @@ id,age,weight,height
 
 # 주의 사항
 - 코드 품질을 높이기 위해 C++의 경우 STL, Java/python의 경우 외부 모듈을 필요한 경우 사용하셔도 됩니다.
+
+## Golden Master 회귀 테스트
+- `TexttestFixture.run(...)` 출력은 `src/test/resources/golden-master/golden_master_expected.txt`에 기준 출력으로 보관합니다.
+- 기준 입력 CSV는 `src/test/resources/golden-master/shealth_golden_master_input.csv`입니다.
+- 일반 검증은 `mvn test`로 실행하며, JUnit 5/Surefire 설정에 따라 CI에서도 자동 실행됩니다.
+- 의도적으로 출력이 변경된 경우에만 `mvn test -DupdateGoldenMaster=true`로 기준 출력을 갱신한 뒤 변경 내용을 리뷰합니다.
+- ApprovalTests는 동일한 출력 문자열을 approved/received 파일로 비교하는 방식으로 확장할 수 있습니다. 현재 구성은 외부 diff 도구 없이 CI에서 안정적으로 동작하도록 파일 기반 비교를 기본으로 사용합니다.
 

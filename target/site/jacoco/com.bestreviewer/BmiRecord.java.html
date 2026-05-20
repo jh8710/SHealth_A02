@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BmiRecord.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CoreProject</a> &gt; <a href="index.source.html" class="el_package">com.bestreviewer</a> &gt; <span class="el_source">BmiRecord.java</span></div><h1>BmiRecord.java</h1><pre class="source lang-java linenums">package com.bestreviewer;
+
+public class BmiRecord {
+    private final String id;
+    private final int age;
+    private final double weight;
+    private final double height;
+
+    public BmiRecord(int age, double weight, double height) {
+<span class="fc" id="L10">        this(&quot;&quot;, age, weight, height);</span>
+<span class="fc" id="L11">    }</span>
+
+<span class="fc" id="L13">    public BmiRecord(String id, int age, double weight, double height) {</span>
+<span class="fc" id="L14">        validate(age, weight, height);</span>
+<span class="fc" id="L15">        this.id = id;</span>
+<span class="fc" id="L16">        this.age = age;</span>
+<span class="fc" id="L17">        this.weight = weight;</span>
+<span class="fc" id="L18">        this.height = height;</span>
+<span class="fc" id="L19">    }</span>
+
+    public String getId() {
+<span class="fc" id="L22">        return id;</span>
+    }
+
+    public int getAge() {
+<span class="fc" id="L26">        return age;</span>
+    }
+
+    public double getWeight() {
+<span class="fc" id="L30">        return weight;</span>
+    }
+
+    public double getHeight() {
+<span class="fc" id="L34">        return height;</span>
+    }
+
+    public BmiRecord withWeightAndHeight(double weight, double height) {
+<span class="fc" id="L38">        return new BmiRecord(id, age, weight, height);</span>
+    }
+
+    private void validate(int age, double weight, double height) {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (age &lt; 0) {</span>
+<span class="fc" id="L43">            throw new IllegalArgumentException(&quot;Age must not be negative.&quot;);</span>
+        }
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (weight &lt; 0.0) {</span>
+<span class="fc" id="L46">            throw new IllegalArgumentException(&quot;Weight must not be negative.&quot;);</span>
+        }
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (height &lt; 0.0) {</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(&quot;Height must not be negative.&quot;);</span>
+        }
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

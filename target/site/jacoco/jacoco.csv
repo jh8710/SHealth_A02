@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+CoreProject,com.bestreviewer,BMICalculator,7,420,2,44,2,81,2,38,0,17
+CoreProject,com.bestreviewer,BmiDataReader,14,107,2,6,4,24,2,6,0,4
+CoreProject,com.bestreviewer,BmiStatistics,4,91,2,4,1,18,2,10,0,9
+CoreProject,com.bestreviewer,BMICalculator.AgeGroupAverage,0,15,0,0,0,6,0,3,0,3
+CoreProject,com.bestreviewer,BmiCategory,9,61,1,3,2,11,2,4,1,3
+CoreProject,com.bestreviewer,SHealth,16,87,1,3,5,18,3,10,2,9
+CoreProject,com.bestreviewer,SHealthBMI,240,0,0,0,10,0,2,0,2,0
+CoreProject,com.bestreviewer,BmiRecord,0,75,0,6,0,21,0,11,0,8

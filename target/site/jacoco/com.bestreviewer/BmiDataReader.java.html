@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BmiDataReader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CoreProject</a> &gt; <a href="index.source.html" class="el_package">com.bestreviewer</a> &gt; <span class="el_source">BmiDataReader.java</span></div><h1>BmiDataReader.java</h1><pre class="source lang-java linenums">package com.bestreviewer;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="fc" id="L9">class BmiDataReader {</span>
+    private static final char CSV_DELIMITER = ',';
+    private static final int ID_INDEX = 0;
+    private static final int AGE_INDEX = 1;
+    private static final int WEIGHT_INDEX = 2;
+    private static final int HEIGHT_INDEX = 3;
+
+    List&lt;BmiRecord&gt; read(String filename) {
+<span class="fc" id="L17">        List&lt;BmiRecord&gt; records = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L18">        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {</span>
+<span class="fc" id="L19">            reader.readLine();</span>
+            String line;
+<span class="fc bfc" id="L21" title="All 2 branches covered.">            while ((line = reader.readLine()) != null) {</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">                if (line.trim().isEmpty()) {</span>
+<span class="nc" id="L23">                    continue;</span>
+                }
+<span class="fc" id="L25">                records.add(createRecord(split(line, CSV_DELIMITER)));</span>
+            }
+<span class="nc" id="L27">        } catch (IOException e) {</span>
+<span class="nc" id="L28">            throw new IllegalStateException(&quot;Failed to read BMI data file: &quot; + filename, e);</span>
+<span class="fc" id="L29">        }</span>
+<span class="fc" id="L30">        return records;</span>
+    }
+
+    private BmiRecord createRecord(List&lt;String&gt; tokens) {
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (tokens.size() != 4) {</span>
+<span class="nc" id="L35">            throw new IllegalArgumentException(&quot;Invalid BMI data line.&quot;);</span>
+        }
+<span class="fc" id="L37">        return new BmiRecord(</span>
+<span class="fc" id="L38">                tokens.get(ID_INDEX),</span>
+<span class="fc" id="L39">                Integer.parseInt(tokens.get(AGE_INDEX)),</span>
+<span class="fc" id="L40">                Double.parseDouble(tokens.get(WEIGHT_INDEX)),</span>
+<span class="fc" id="L41">                Double.parseDouble(tokens.get(HEIGHT_INDEX))</span>
+        );
+    }
+
+    private List&lt;String&gt; split(String line, char delimiter) {
+<span class="fc" id="L46">        List&lt;String&gt; tokens = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L47">        int start = 0;</span>
+<span class="fc" id="L48">        int end = line.indexOf(delimiter);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        while (end != -1) {</span>
+<span class="fc" id="L50">            tokens.add(line.substring(start, end).trim());</span>
+<span class="fc" id="L51">            start = end + 1;</span>
+<span class="fc" id="L52">            end = line.indexOf(delimiter, start);</span>
+        }
+<span class="fc" id="L54">        tokens.add(line.substring(start).trim());</span>
+<span class="fc" id="L55">        return tokens;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
