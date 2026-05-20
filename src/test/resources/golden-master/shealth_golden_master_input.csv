@@ -1,0 +1,16 @@
+id,age,weight,height
+twenty-underweight,20,50.0,170.0
+twenty-normal,22,60.0,170.0
+twenty-overweight,25,68.0,170.0
+twenty-obesity,27,75.0,170.0
+twenty-missing-weight,29,0.0,170.0
+thirty-underweight,30,50.0,170.0
+thirty-normal,32,60.0,170.0
+thirty-overweight,35,68.0,170.0
+thirty-obesity,37,75.0,170.0
+thirty-missing-weight,39,0.0,170.0
+forty-underweight,40,50.0,170.0
+forty-normal,42,60.0,170.0
+forty-overweight,45,68.0,170.0
+forty-obesity,47,75.0,170.0
+forty-missing-weight,49,0.0,170.0

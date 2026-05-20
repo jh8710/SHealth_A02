@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.bestreviewer.SHealthBMITest" time="2.298" tests="40" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.bestreviewer.TexttestFixtureGoldenMasterTest" time="0.079" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -60,44 +60,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="should_calculate_overall_category_ratio" classname="com.bestreviewer.SHealthBMITest" time="0.255"/>
-  <testcase name="should_throw_exception_when_record_has_invalid_age_weight_or_height(int, double, double)[1]" classname="com.bestreviewer.SHealthBMITest" time="0.25"/>
-  <testcase name="should_throw_exception_when_record_has_invalid_age_weight_or_height(int, double, double)[2]" classname="com.bestreviewer.SHealthBMITest" time="0.007"/>
-  <testcase name="should_throw_exception_when_record_has_invalid_age_weight_or_height(int, double, double)[3]" classname="com.bestreviewer.SHealthBMITest" time="0.004"/>
-  <testcase name="should_correct_missing_weight_by_same_age_group_average(int, double)[1]" classname="com.bestreviewer.SHealthBMITest" time="0.057"/>
-  <testcase name="should_correct_missing_weight_by_same_age_group_average(int, double)[2]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_correct_missing_weight_by_same_age_group_average(int, double)[3]" classname="com.bestreviewer.SHealthBMITest" time="0.079"/>
-  <testcase name="should_calculate_specific_age_group_bmi_distribution" classname="com.bestreviewer.SHealthBMITest" time="0.01"/>
-  <testcase name="should_classify_bmi_category_when_bmi_boundary_values_are_given" classname="com.bestreviewer.SHealthBMITest" time="0.01"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[1]" classname="com.bestreviewer.SHealthBMITest" time="0.4"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[2]" classname="com.bestreviewer.SHealthBMITest" time="0.026"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[3]" classname="com.bestreviewer.SHealthBMITest" time="0.022"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[4]" classname="com.bestreviewer.SHealthBMITest" time="0.029"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[5]" classname="com.bestreviewer.SHealthBMITest" time="0.027"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[6]" classname="com.bestreviewer.SHealthBMITest" time="0.026"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[7]" classname="com.bestreviewer.SHealthBMITest" time="0.026"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[8]" classname="com.bestreviewer.SHealthBMITest" time="0.03"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[9]" classname="com.bestreviewer.SHealthBMITest" time="0.036"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[10]" classname="com.bestreviewer.SHealthBMITest" time="0.021"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[11]" classname="com.bestreviewer.SHealthBMITest" time="0.03"/>
-  <testcase name="should_calculate_bmi_ratio_by_age_group_through_shealth_api(int, int, double)[12]" classname="com.bestreviewer.SHealthBMITest" time="0.024"/>
-  <testcase name="should_apply_average_correction_when_weight_and_height_are_zero" classname="com.bestreviewer.SHealthBMITest" time="0.006"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[1]" classname="com.bestreviewer.SHealthBMITest" time="0.017"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[2]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[3]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[4]" classname="com.bestreviewer.SHealthBMITest" time="0.007"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[5]" classname="com.bestreviewer.SHealthBMITest" time="0.002"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[6]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[7]" classname="com.bestreviewer.SHealthBMITest" time="0.002"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[8]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[9]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[10]" classname="com.bestreviewer.SHealthBMITest" time="0.013"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[11]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[12]" classname="com.bestreviewer.SHealthBMITest" time="0.005"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[13]" classname="com.bestreviewer.SHealthBMITest" time="0.003"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[14]" classname="com.bestreviewer.SHealthBMITest" time="0.011"/>
-  <testcase name="should_calculate_each_age_group_bmi_statistics_with_at_least_five_cases(int, String, double)[15]" classname="com.bestreviewer.SHealthBMITest" time="0.002"/>
-  <testcase name="should_calculate_bmi_when_weight_and_height_are_valid" classname="com.bestreviewer.SHealthBMITest" time="0.002"/>
-  <testcase name="should_calculate_age_group_statistics_when_records_have_different_age_groups" classname="com.bestreviewer.SHealthBMITest" time="0.007"/>
-  <testcase name="should_find_users_in_normal_bmi_range" classname="com.bestreviewer.SHealthBMITest" time="0.015"/>
+  <testcase name="should_match_golden_master_output" classname="com.bestreviewer.TexttestFixtureGoldenMasterTest" time="0.067"/>
 </testsuite>

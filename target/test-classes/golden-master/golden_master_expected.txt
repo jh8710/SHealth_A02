@@ -1,0 +1,6 @@
+20 - underweight = 20.000000, normal = 40.000000, overweight = 20.000000, obesity = 20.000000
+30 - underweight = 20.000000, normal = 40.000000, overweight = 20.000000, obesity = 20.000000
+40 - underweight = 20.000000, normal = 40.000000, overweight = 20.000000, obesity = 20.000000
+50 - underweight = 0.000000, normal = 0.000000, overweight = 0.000000, obesity = 0.000000
+60 - underweight = 0.000000, normal = 0.000000, overweight = 0.000000, obesity = 0.000000
+70 - underweight = 0.000000, normal = 0.000000, overweight = 0.000000, obesity = 0.000000

@@ -217,6 +217,23 @@ public class SHealthBMITest {
         assertEquals(expectedWeight, missingWeightRecord.getWeight(), DELTA);
     }
 
+    @ParameterizedTest(name = "age={0}, weight={1}, height={2} 입력은 예외 처리된다")
+    @DisplayName("Given 정상 범위가 아닌 나이/체중/키가 있을 때 When BMI 기록을 생성하면 Then 예외가 발생한다")
+    @CsvSource({
+            "-1, 60.0, 170.0",
+            "20, -1.0, 170.0",
+            "30, 60.0, -1.0"
+    })
+    void should_throw_exception_when_record_has_invalid_age_weight_or_height(
+            int age, double weight, double height
+    ) {
+        // Given
+        String id = "invalid-record";
+
+        // When & Then
+        assertThrows(IllegalArgumentException.class, () -> new BmiRecord(id, age, weight, height));
+    }
+
     @ParameterizedTest(name = "{0}대 카테고리 코드 {1} 비율은 {2}%")
     @DisplayName("Given CSV 파일에 20대/30대/40대 데이터가 있을 때 When SHealth API로 조회하면 Then 나이대별 BMI 비율을 반환한다")
     @CsvSource({

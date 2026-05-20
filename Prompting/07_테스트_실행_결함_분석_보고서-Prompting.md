@@ -17,14 +17,11 @@
 [F] 수정 diff 제안 + 수정 후 mvn test Green 확인 절차
 ```
 
-### 1.2 결함 목록 문서화 프롬프트
+### 1.2 보고서 및 프롬프트 갱신 요청
 
 ```text
-[P] QA 리드입니다.
-[C] 현재까지 발견된 테스트 실패/결함들을 문서화합니다.
-[T] 발견된 결함을 다음 형식으로 defect_list.md에 정리해줘.
-    항목: [ID] [Severity] [ItemType] [Steps] [Expected] [Actual] [Root Cause] [Fix Summary]
-[F] Markdown. defect_list.md로 저장
+이번에 한 내용을 report 폴더에 07_테스트_실행_결함_분석_보고서.md 파일로 내보내주고,
+프롬프트를 포함해서 Prompting 폴더에 07_테스트_실행_결함_분석_보고서-Prompting.md 파일로 내보내줘. 이미 작성되어있지만 새로운 내용이 추가되어서 갱신이야
 ```
 
 ## 2. 프롬프트 의도
@@ -38,24 +35,41 @@
 - 결함의 심각도를 Critical, Major, Minor, Info 중 하나로 분류한다.
 - `Item` 클래스는 수정하지 않는 제약 안에서 최소 코드 변경안을 제안한다.
 - 수정 diff와 테스트 Green 확인 절차를 함께 제공한다.
-- 현재까지 발견된 결함 목록을 지정 형식에 맞춰 `defect_list.md`로 문서화한다.
+- 기존 보고서와 프롬프트 문서를 최신 테스트 실행 결과로 갱신한다.
 
-## 3. 생성 보고서
+## 3. 수행 내용
+
+분석 대상 파일인 `SHealthBMITest.java`와 `SHealth.java`를 확인한 뒤, 실제로 `mvn test`를 실행해 실패 로그가 재현되는지 확인했다.
+
+실행 결과는 다음과 같이 전체 Green 상태였다.
+
+```text
+Running com.bestreviewer.SHealthBMITest
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+
+Running com.bestreviewer.TexttestFixtureGoldenMasterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+Results:
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+## 4. 생성 보고서
 
 # 07 테스트 실행 결함 분석 보고서
 
 ## 1. 작업 개요
 
-이번 작업에서는 `SHealthBMITest.java`와 `SHealth.java`를 기준으로 BMI 테스트 실행 결과를 확인하고, 테스트 실패가 발생할 경우를 가정한 결함 분석 항목을 점검했다.
+이번 작업에서는 `SHealthBMITest.java`와 `SHealth.java`를 기준으로 BMI 테스트를 실행하고, 실패 로그가 재현되는지 확인했다.
 
-검토 요청의 핵심은 다음과 같다.
+요청된 분석 항목은 다음과 같다.
 
-- `mvn test` 실패 원인 확인
-- 기대값과 실제값 차이 요약
+- `mvn test` 실패 원인 및 기대값/실제값 차이 요약
 - `SHealth.java` 내 버그 위치 특정
-- 결함 심각도 분류
+- 결함 심각도 분류 및 근거 정리
 - `Item` 클래스 수정 없이 최소 코드 변경 방안 제안
-- 수정 diff와 Green 확인 절차 정리
+- 수정 diff 제안과 수정 후 `mvn test` Green 확인 절차 정리
 
 ## 2. 분석 대상 파일
 
@@ -77,11 +91,18 @@ mvn test
 실행 결과는 다음과 같다.
 
 ```text
-Tests run: 37, Failures: 0, Errors: 0, Skipped: 0
+Running com.bestreviewer.SHealthBMITest
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+
+Running com.bestreviewer.TexttestFixtureGoldenMasterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+Results:
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
-현재 작업본에서는 `SHealthBMITest` 전체 테스트가 모두 통과하므로 실패 로그가 재현되지 않았다.
+현재 작업본에서는 `SHealthBMITest` 40건과 Golden Master 테스트 1건이 모두 통과했다. 따라서 요청 프롬프트의 전제였던 `mvn test` 실패 로그는 현재 상태에서 재현되지 않았다.
 
 ## 4. 실패 원인 분석
 
@@ -89,7 +110,7 @@ BUILD SUCCESS
 
 | 항목 | 결과 |
 |---|---|
-| 기대값 | 테스트별 기대 BMI 계산값, 보정값, 카테고리 비율 |
+| 기대값 | 테스트별 기대 BMI 계산값, 누락값 보정값, 카테고리 비율 |
 | 실제값 | 기대값과 일치 |
 | 실패 수 | 0 |
 | 에러 수 | 0 |
@@ -108,7 +129,7 @@ BUILD SUCCESS
 
 현재 기준으로 테스트 실패를 유발하는 버그 위치는 특정되지 않았다.
 
-다만 실패가 발생한다면 우선 확인할 후보 위치는 다음과 같다.
+다만 동일 계열의 실패가 발생한다면 우선 확인할 후보 위치는 다음과 같다.
 
 | 후보 위치 | 점검 이유 |
 |---|---|
@@ -126,7 +147,7 @@ BUILD SUCCESS
 | 분류 | 판단 |
 |---|---|
 | 심각도 | Info |
-| 근거 | `mvn test` 결과 전체 37개 테스트가 통과했으며 실패, 에러, 스킵이 없다. |
+| 근거 | `mvn test` 결과 전체 41개 테스트가 통과했으며 실패, 에러, 스킵이 없다. |
 | 사용자 영향 | 현재 테스트 기준 기능 영향 없음 |
 | 수정 필요성 | 없음 |
 
@@ -139,7 +160,7 @@ BUILD SUCCESS
 수정 diff 제안은 다음과 같다.
 
 ```diff
-No changes required.
+# no changes required
 ```
 
 ## 8. Green 확인 절차
@@ -153,7 +174,7 @@ mvn test
 기대 결과:
 
 ```text
-Tests run: 37, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
@@ -163,33 +184,7 @@ BUILD SUCCESS
 
 현재 BMI 계산, 누락값 보정, 카테고리 분류, 연령대별 통계, `SHealth` CSV API 통합 흐름은 모두 테스트 Green 상태로 확인되었다.
 
-## 4. 추가 산출물: defect_list.md
-
-두 번째 프롬프트에 따라 현재까지 발견된 테스트 실패와 결함을 `defect_list.md`에 별도로 정리했다.
-
-현재 테스트 결과가 Green 상태이므로 확정 결함은 없으며, 다음과 같이 `Info` 항목으로 기록했다.
-
-````markdown
-# Defect List
-
-## Summary
-
-현재까지 실행한 `mvn test` 기준으로 재현된 테스트 실패나 확정 결함은 없다.
-
-```text
-Tests run: 37, Failures: 0, Errors: 0, Skipped: 0
-BUILD SUCCESS
-```
-
-## Defects
-
-| ID | Severity | ItemType | Steps | Expected | Actual | Root Cause | Fix Summary |
-|---|---|---|---|---|---|---|---|
-| N/A | Info | Test Result | 1. `mvn test` 실행<br>2. `SHealthBMITest` 전체 결과 확인 | 모든 테스트가 통과해야 한다. | `37`개 테스트 모두 통과했고 실패/에러는 발생하지 않았다. | 재현된 결함 없음 | 코드 수정 불필요 |
-````
-
 ## 5. 이번 세션 산출물
 
 - `report/07_테스트_실행_결함_분석_보고서.md`
 - `Prompting/07_테스트_실행_결함_분석_보고서-Prompting.md`
-- `defect_list.md`
