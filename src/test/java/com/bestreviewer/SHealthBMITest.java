@@ -272,6 +272,37 @@ public class SHealthBMITest {
         }
     }
 
+    @Test
+    @DisplayName("Given CSV 파일이 있을 때 When 신규 SHealth API로 조회하면 Then 연령대/정상사용자/전체비율을 반환한다")
+    void should_query_distribution_normal_user_ids_and_overall_ratios_through_shealth_api() throws IOException {
+        // Given
+        Path dataFile = Files.createTempFile("shealth-bmi-new-api-", ".dat");
+        try {
+            Files.write(dataFile, createCsvLines(), StandardCharsets.UTF_8);
+            SHealth sHealth = new SHealth();
+            sHealth.calculateBmi(dataFile.toString());
+
+            // When
+            Map<BmiCategory, Double> twentiesRatio = sHealth.getBmiDistributionRatio(20);
+            List<String> normalUserIds = sHealth.getNormalBmiUserIds();
+            Map<BmiCategory, Double> overallRatio = sHealth.getOverallBmiCategoryRatios();
+
+            // Then
+            assertAll(
+                    () -> assertEquals(20.0, twentiesRatio.get(BmiCategory.UNDERWEIGHT), DELTA),
+                    () -> assertEquals(40.0, twentiesRatio.get(BmiCategory.NORMAL), DELTA),
+                    () -> assertTrue(normalUserIds.contains("twenty-normal")),
+                    () -> assertTrue(normalUserIds.contains("twenty-missing-weight")),
+                    () -> assertEquals(20.0, overallRatio.get(BmiCategory.UNDERWEIGHT), DELTA),
+                    () -> assertEquals(40.0, overallRatio.get(BmiCategory.NORMAL), DELTA),
+                    () -> assertEquals(20.0, overallRatio.get(BmiCategory.OVERWEIGHT), DELTA),
+                    () -> assertEquals(20.0, overallRatio.get(BmiCategory.OBESITY), DELTA)
+            );
+        } finally {
+            Files.deleteIfExists(dataFile);
+        }
+    }
+
     private List<BmiRecord> createTwentyThirtyFortyRecords() {
         return Arrays.asList(
                 new BmiRecord("twenty-underweight", 20, 50.0, 170.0),

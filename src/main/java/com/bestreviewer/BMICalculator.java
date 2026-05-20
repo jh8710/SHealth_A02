@@ -13,20 +13,24 @@ public class BMICalculator {
     private static final double UNDERWEIGHT_MAX_BMI = 18.5;
     private static final double NORMAL_MAX_BMI = 23.0;
     private static final double OVERWEIGHT_MAX_BMI = 25.0;
+    private static final double BMI_BOUNDARY_EPSILON = 0.000000001;
 
     public double calculateBmi(double weight, double height) {
+        if (height <= MISSING_VALUE) {
+            throw new IllegalArgumentException("Height must be greater than 0.");
+        }
         double heightInMeters = height / CENTIMETERS_PER_METER;
         return weight / (heightInMeters * heightInMeters);
     }
 
     public BmiCategory classify(double bmi) {
-        if (bmi <= UNDERWEIGHT_MAX_BMI) {
+        if (bmi <= UNDERWEIGHT_MAX_BMI + BMI_BOUNDARY_EPSILON) {
             return BmiCategory.UNDERWEIGHT;
         }
-        if (bmi < NORMAL_MAX_BMI) {
+        if (bmi < NORMAL_MAX_BMI - BMI_BOUNDARY_EPSILON) {
             return BmiCategory.NORMAL;
         }
-        if (bmi < OVERWEIGHT_MAX_BMI) {
+        if (bmi < OVERWEIGHT_MAX_BMI - BMI_BOUNDARY_EPSILON) {
             return BmiCategory.OVERWEIGHT;
         }
         return BmiCategory.OBESITY;
@@ -68,6 +72,14 @@ public class BMICalculator {
             }
         }
         return normalUsers;
+    }
+
+    public List<String> findNormalRangeUserIds(List<BmiRecord> records) {
+        List<String> normalUserIds = new ArrayList<>();
+        for (BmiRecord record : findNormalRangeUsers(records)) {
+            normalUserIds.add(record.getId());
+        }
+        return normalUserIds;
     }
 
     public BmiStatistics calculateOverallCategoryRatio(List<BmiRecord> records) {

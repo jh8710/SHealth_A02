@@ -44,4 +44,12 @@ public class BmiStatistics {
     public double getObesityRatio() {
         return getRatio(BmiCategory.OBESITY);
     }
+
+    public Map<BmiCategory, Double> toRatioMap() {
+        Map<BmiCategory, Double> ratios = new EnumMap<>(BmiCategory.class);
+        for (BmiCategory category : BmiCategory.values()) {
+            ratios.put(category, getRatio(category));
+        }
+        return ratios;
+    }
 }
