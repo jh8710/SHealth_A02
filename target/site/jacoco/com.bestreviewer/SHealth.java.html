@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SHealth.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CoreProject</a> &gt; <a href="index.source.html" class="el_package">com.bestreviewer</a> &gt; <span class="el_source">SHealth.java</span></div><h1>SHealth.java</h1><pre class="source lang-java linenums">package com.bestreviewer;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+public class SHealth {
+    private final BmiDataReader dataReader;
+    private final BMICalculator calculator;
+    private List&lt;BmiRecord&gt; records;
+    private Map&lt;Integer, BmiStatistics&gt; statisticsByAgeGroup;
+
+    public SHealth() {
+<span class="fc" id="L14">        this(new BmiDataReader(), new BMICalculator());</span>
+<span class="fc" id="L15">    }</span>
+
+    public SHealth(BMICalculator calculator) {
+<span class="nc" id="L18">        this(new BmiDataReader(), calculator);</span>
+<span class="nc" id="L19">    }</span>
+
+<span class="fc" id="L21">    SHealth(BmiDataReader dataReader, BMICalculator calculator) {</span>
+<span class="fc" id="L22">        this.dataReader = dataReader;</span>
+<span class="fc" id="L23">        this.calculator = calculator;</span>
+<span class="fc" id="L24">        this.records = Collections.emptyList();</span>
+<span class="fc" id="L25">    }</span>
+
+    public int calculateBmi(String filename) {
+<span class="fc" id="L28">        records = dataReader.read(filename);</span>
+<span class="fc" id="L29">        statisticsByAgeGroup = calculator.calculateStatistics(records);</span>
+<span class="fc" id="L30">        return records.size();</span>
+    }
+
+    public double getBmiRatio(int ageClass, int type) {
+<span class="pc bpc" id="L34" title="1 of 4 branches missed.">        if (statisticsByAgeGroup == null || !statisticsByAgeGroup.containsKey(ageClass)) {</span>
+<span class="fc" id="L35">            return 0.0;</span>
+        }
+        try {
+<span class="fc" id="L38">            return statisticsByAgeGroup.get(ageClass).getRatio(BmiCategory.fromCode(type));</span>
+<span class="nc" id="L39">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L40">            return 0.0;</span>
+        }
+    }
+
+    public BmiStatistics getAgeGroupDistribution(int ageClass) {
+<span class="fc" id="L45">        return calculator.calculateAgeGroupDistribution(records, ageClass);</span>
+    }
+
+    public Map&lt;BmiCategory, Double&gt; getBmiDistributionRatio(int ageClass) {
+<span class="fc" id="L49">        return getAgeGroupDistribution(ageClass).toRatioMap();</span>
+    }
+
+    public List&lt;BmiRecord&gt; getNormalRangeUsers() {
+<span class="nc" id="L53">        return calculator.findNormalRangeUsers(records);</span>
+    }
+
+    public List&lt;String&gt; getNormalBmiUserIds() {
+<span class="fc" id="L57">        return calculator.findNormalRangeUserIds(records);</span>
+    }
+
+    public BmiStatistics getOverallCategoryRatio() {
+<span class="fc" id="L61">        return calculator.calculateOverallCategoryRatio(records);</span>
+    }
+
+    public Map&lt;BmiCategory, Double&gt; getOverallBmiCategoryRatios() {
+<span class="fc" id="L65">        return getOverallCategoryRatio().toRatioMap();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
